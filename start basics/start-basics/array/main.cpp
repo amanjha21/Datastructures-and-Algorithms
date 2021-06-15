@@ -243,12 +243,13 @@ void arrangeNegativeFirst(struct Array *arr)
       }
 }
 
-void mergeArray(struct Array *a, struct Array *b, struct Array *c)
+struct Array *mergeArray(struct Array *a, struct Array *b)
 {
-      // struct Array c;
+      struct Array *c;
+      c = (struct Array *)malloc(sizeof(struct Array));
       c->size = a->length + b->length;
       c->length = c->size;
-      c->A = (int *)malloc(c->size * sizeof(struct Array));
+      c->A = (int *)malloc(c->size * sizeof(int));
       int i = 0, j = 0, k = 0;
       while (i < a->length && j < b->length)
       {
@@ -261,18 +262,14 @@ void mergeArray(struct Array *a, struct Array *b, struct Array *c)
             c->A[k++] = a->A[i];
       for (; j < b->length; j++)
             c->A[k++] = b->A[j];
-      return;
+      return c;
 }
 int main()
 {
       struct Array a;
       initilize(&a);
-      struct Array b;
-      initilize(&b);
       cout << "a: ";
       display(a);
-      cout << "b: ";
-      display(b);
       //append(&a, 23);
       //display(a);
       //Insert(&a,4,24);
@@ -287,9 +284,14 @@ int main()
       // insertInSortedArray(&a, 5);
       // cout << "isSorted: " << checkSorted(&a) << endl;
       // arrangeNegativeFirst(&a);
-      struct Array c;
-      mergeArray(&a, &b, &c);
-      display(c);
+
+      // struct Array b;
+      // initilize(&b);
+      // cout << "b: ";
+      // display(b);
+      // struct Array *c;
+      // c = mergeArray(&a, &b);
+      // display(*c);
 
       return 0;
 }
