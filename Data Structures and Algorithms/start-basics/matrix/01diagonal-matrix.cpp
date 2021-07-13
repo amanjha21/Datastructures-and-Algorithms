@@ -2,37 +2,54 @@
 #include <iostream>
 using namespace std;
 
-struct diagonalMatrix
+class DiagonalMatrix
 {
-    int A[5];
-    int n = 5;
+private:
+    int *A;
+    int n;
+
+public:
+    DiagonalMatrix()
+    {
+        n = 2;
+        A = new int[2];
+    }
+    DiagonalMatrix(int n)
+    {
+        this->n = n;
+        A = new int[n];
+    }
+    void set(int i, int j, int x);
+    int get(int i, int j);
+    void display();
+    ~DiagonalMatrix() { delete[] A; }
 };
 
-void Set(struct diagonalMatrix *m, int i, int j, int x)
+void DiagonalMatrix::set(int i, int j, int x)
 {
     if (i == j)
     {
-        m->A[i - 1] = x;
+        A[i - 1] = x;
     }
 }
 
-int Get(struct diagonalMatrix m, int i, int j)
+int DiagonalMatrix::get(int i, int j)
 {
     if (i == j)
-        return m.A[i - 1];
+        return A[i - 1];
     else
         return 0;
 }
 
-void Display(struct diagonalMatrix m)
+void DiagonalMatrix::display()
 {
     int i = 0, j = 0;
-    for (i = 0; i < m.n - 1; i++)
+    for (i = 0; i < n - 1; i++)
     {
-        for (j = 0; j < m.n - 1; j++)
+        for (j = 0; j < n - 1; j++)
         {
             if (i == j)
-                cout << m.A[i] << " ";
+                cout << A[i] << " ";
             else
                 cout << "0 ";
         }
@@ -42,14 +59,15 @@ void Display(struct diagonalMatrix m)
 
 int main()
 {
-    struct diagonalMatrix m;
-    Set(&m, 1, 1, 1);
-    Set(&m, 2, 2, 2);
-    Set(&m, 3, 3, 3);
-    Set(&m, 4, 4, 4);
-    cout << Get(m, 3, 3);
+    DiagonalMatrix m(5);
+
+    m.set(1, 1, 1);
+    m.set(2, 2, 2);
+    m.set(3, 3, 3);
+    m.set(4, 4, 4);
+    cout << m.get(3, 3);
     cout << endl;
-    Display(m);
+    m.display();
 
     return 0;
 }
