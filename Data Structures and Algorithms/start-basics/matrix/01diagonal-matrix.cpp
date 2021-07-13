@@ -44,9 +44,9 @@ int DiagonalMatrix::get(int i, int j)
 void DiagonalMatrix::display()
 {
     int i = 0, j = 0;
-    for (i = 0; i < n - 1; i++)
+    for (i = 0; i < n; i++)
     {
-        for (j = 0; j < n - 1; j++)
+        for (j = 0; j < n; j++)
         {
             if (i == j)
                 cout << A[i] << " ";
@@ -65,6 +65,7 @@ int main()
     m.set(2, 2, 2);
     m.set(3, 3, 3);
     m.set(4, 4, 4);
+    m.set(5, 5, 5);
     cout << m.get(3, 3);
     cout << endl;
     m.display();
