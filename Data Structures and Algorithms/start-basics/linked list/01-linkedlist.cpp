@@ -105,18 +105,27 @@ public:
         }
         temp->next = p->next;
     }
+    void get(int n)
+    {
+        Node *p = head;
+        for (int i = 0; i < n; i++)
+            p = p->next;
+        cout << p->data;
+    }
 };
 int main()
 {
     int x[5] = {1, 2, 3, 4, 5};
-    Linkedlist A;
-    A.insertAtTail(2);
+    Linkedlist A;      //linkedlist oject using class linkedlist class
+    A.insertAtTail(2); //insert at end of linked list
     A.insertAtTail(3);
-    A.insertFromArray(x, 5);
-    A.insertAt(0, 100);
+    A.insertFromArray(x, 5); //insert values from arrary at end of list
+    A.insertAt(0, 100);      // insert element at particular index
+    A.display();             // display all the elements of linkedlist
+    cout << endl;
+    A.removeAt(4, 2); //remove no. of element/s from particular index
     A.display();
     cout << endl;
-    A.removeAt(4, 2);
-    A.display();
+    A.get(2); //get or display element at particular index
     // A.recursiveDisplay();
 }
