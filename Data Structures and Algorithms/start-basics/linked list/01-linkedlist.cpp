@@ -11,13 +11,13 @@ public:
         data = x;
         next = 0;
     }
+    code
 };
 class Linkedlist
 {
-private:
+public:
     Node *head;
 
-public:
     Linkedlist()
     {
         head = 0;
@@ -45,6 +45,7 @@ public:
             cout << p->data << " ";
             p = p->next;
         }
+        cout << endl;
     }
     void insertFromArray(int A[], int n)
     {
@@ -53,15 +54,6 @@ public:
             insertAtTail(A[i]);
         }
     }
-    // void recursiveDisplay(Node *p = head)
-    // {
-    //     if (p)
-    //     {
-    //         return recursiveDisplay(p->next);
-    //         cout << p->data << " ";
-    //     }
-    //     return;
-    // }
     void insertAt(int n, int x)
     {
         Node *p, *temp;
@@ -90,42 +82,185 @@ public:
             n++;
         }
     }
-    void removeAt(int n, int m = 1)
+    int remove(int n)
     {
-        Node *p, *temp;
+        Node *p, *q;
+        int x;
         p = head;
-        for (int i = 0; i < n - 1; i++)
+        q = 0;
+        if (n == 0)
         {
+            head = p->next;
+            x = p->data;
+            delete p;
+            return x;
+        }
+        for (int i = 0; i < n; i++)
+        {
+            q = p;
             p = p->next;
         }
-        temp = p;
-        for (int j = 0; j < m; j++)
-        {
-            p = p->next;
-        }
-        temp->next = p->next;
+        q->next = p->next;
+        x = p->data;
+        delete p;
+        return x;
     }
     void get(int n)
     {
         Node *p = head;
         for (int i = 0; i < n; i++)
             p = p->next;
-        cout << p->data;
+        cout << p->data << endl;
+    }
+    void count()
+    {
+        Node *p = head;
+        int count = 0;
+        while (p)
+        {
+            count++;
+            p = p->next;
+        }
+        cout << count << endl;
+    }
+    void sumAll()
+    {
+        Node *p = head;
+        int sum = 0;
+        while (p)
+        {
+            sum += p->data;
+            p = p->next;
+        }
+        cout << sum << endl;
+    }
+    void max()
+    {
+        if (!head)
+            return;
+        Node *p = head;
+        int max = p->data;
+        while (p)
+        {
+            if (p->data > max)
+                max = p->data;
+            p = p->next;
+        }
+        cout << max << endl;
+    }
+    void min()
+    {
+        if (!head)
+            return;
+        Node *p = head;
+        int min = p->data;
+        while (p)
+        {
+            if (p->data < min)
+                min = p->data;
+            p = p->next;
+        }
+        cout << min;
+    }
+    void search(int x)
+    {
+        if (!head)
+            return;
+        Node *p, *q = 0, *temp;
+        p = head;
+        if (p->data == x)
+        {
+            cout << p << endl;
+            q = p;
+            p = p->next;
+        }
+        while (p)
+        {
+            if (p->data == x)
+            {
+                cout << p << endl;
+                q->next = p->next;
+                temp = head;
+                head = p;
+                p->next = temp;
+                p = q;
+            }
+            q = p;
+            p = p->next;
+        }
+    }
+    bool isSorted()
+    {
+        Node *p, *q;
+        p = head;
+        q = head;
+        while (p)
+        {
+            if (q->data > p->data)
+            {
+                return false;
+            }
+            q = p;
+            p = p->next;
+        }
+        return true;
+    }
+    void removeDuplicates()
+    {
+        Node *p, *q;
+        p = head;
+        q = p->next;
+        while (q)
+        {
+            if (p->data == q->data)
+            {
+                q = q->next;
+                delete p->next;
+                p->next = q;
+            }
+            else
+            {
+                p = p->next;
+                q = q->next;
+            }
+        }
     }
 };
+void recursiveDisplay(Node *p)
+{
+    if (p)
+    {
+        cout << p->data << " ";
+        recursiveDisplay(p->next);
+    }
+}
 int main()
 {
-    int x[5] = {1, 2, 3, 4, 5};
-    Linkedlist A;      //linkedlist oject using class linkedlist class
-    A.insertAtTail(2); //insert at end of linked list
-    A.insertAtTail(3);
-    A.insertFromArray(x, 5); //insert values from arrary at end of list
-    A.insertAt(0, 100);      // insert element at particular index
-    A.display();             // display all the elements of linkedlist
-    cout << endl;
-    A.removeAt(4, 2); //remove no. of element/s from particular index
+    int x[5] = {-2, -1, 4, 4, 5};
+    Linkedlist A; // linkedlist oject using class linkedlist class
+    // A.insertAtTail(2); //insert at end of linked list
+    // A.insertAtTail(3);
+    A.insertFromArray(x, 5); // insert values from arrary at end of list
+    // A.insertAt(0, 100);      // insert element at particular index
+    A.display(); // display all the elements of linkedlist
+    // cout << A.remove(0); //remove single element from index
+    // A.display();
+    // A.get(2); //get or display element at particular index
+    // recursiveDisplay(A.head); //recursive display all elements of linkedlist
+    // cout << endl;
+    // A.count();  //count number of nodes in linkedlist
+    // A.sumAll(); //sum all elements of linkedlist
+    // A.max(); //max element in linked list
+    // A.min(); //min element in linked list
+    // A.search(3); //search and return address of element in linked list and element to 1st node
+    A.removeDuplicates();
     A.display();
-    cout << endl;
-    A.get(2); //get or display element at particular index
-    // A.recursiveDisplay();
+    // if (A.isSorted())
+    // {
+    //     cout << "yes";
+    // }
+    // else
+    // {
+    //     cout << "no";
+    // };
 }
